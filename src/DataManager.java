@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class DataManager {
 
-    ArrayList<Users> usersList;
+    static Scanner in = new Scanner(System.in);
+    static ArrayList<Users> usersList;
     ArrayList<String> userTime;
     public Object userList;
 
@@ -15,10 +16,14 @@ public class DataManager {
         userTime = new ArrayList<>();
     }
 
+
+
+
+
     public void addUser(Users newUser) {
         if(checkSize() == false) {count++;
-            usersList.add(newUser);}
- 
+            this.usersList.add(newUser);}
+
         else System.out.println("users are full");
 
 
@@ -50,7 +55,7 @@ public class DataManager {
     }
 
     public Users getUser(int id) {
-    
+
         for (int i = 0; i < usersList.size(); i++) {
             if(usersList.get(i).getId() == id) return usersList.get(i);
         }
@@ -66,16 +71,70 @@ public class DataManager {
 
 
 
-    public void updateTime(Users currentUser) {
-        String oldTime = currentUser.getTime();
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter new time: ");
-        currentUser.time = input.nextLine();
-        System.out.println(oldTime + " this is old time");
-        System.out.println(currentUser.getTime() + " new time");
+
+
+    public static void updateTime(int id) {
+        boolean userFound = false;
+        String newTime;
+        for(int i = 0; i < usersList.size(); i++) {
+            if(usersList.get(i).getId() == id && usersList.get(i).getTime() != null) {
+                String oldTime = usersList.get(i).getTime();
+                System.out.println("Enter the new time : ");
+                newTime = in.nextLine();
+                usersList.get(i).setTime(newTime);
+                System.out.println("Old time " + oldTime);
+                System.out.println("New time " + newTime);
+                userFound = true;
+                break;
+            }
+        }
+
+        if(userFound) {
+            System.out.println("Time has been updated");
+        } else {
+            System.out.println("User not found or no time added");
+        }
     }
 
-    
+
+    /*ADD TIME METHOD
+      This method takes a user id and if that id is found in the array list, it will add the time else it will print
+      user not found.
+      * */
+    public  static void addTime(int id){
+        boolean userFound = false;
+        String time;
+        for(int i = 0; i< usersList.size(); i++){
+
+
+            if(usersList.get(i).getId()==id){
+                System.out.println("Enter the time to add : ");
+                time = in.nextLine();
+                usersList.get(i).setTime(time);
+                System.out.println(usersList.get(i).getTime());
+
+                userFound = true;
+                break;
+            }
+
+        }
+        if(userFound){
+            System.out.println("Time has been added");
+        } else{
+            System.out.println("User not found");
+        }
+    }
+
+
+    public void viewTime(){
+        for(int i = 0; i< usersList.size(); i++){
+            if(usersList.get(i).getTime()==null){
+                System.out.println(usersList.get(i).getName() + " has not added a time yet");
+            } else{
+                System.out.println(usersList.get(i).getName() + "'s time is " + usersList.get(i).getTime());
+            }
+        }
+    }
 
     public void sortUsers() {
         // what to use ? if we want to sort them
