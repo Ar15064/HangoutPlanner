@@ -2,10 +2,30 @@ import java.util.ArrayList;
 
 public class Users {
 
-    String name;
-    String time;
-    String lastName;
-    int id;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    //private variables is a good practice
+    private String name;
+    private String time;
+    private String lastName;
+    private int id;
+
+
+
+//Removed time parameter from constructor as we will set time using setter and addTime method.
+    public Users(String name, String lastName, int id) {
+
+        this.name = name;
+        this.lastName = lastName;
+        this.id = id;
+    }
 
 
     public String getTime() {
@@ -25,11 +45,7 @@ public class Users {
         this.lastName = lastName;
     }
 
-    Users(String name, String lastName, int id,String time) {
-        this.time = time;
-        this.name = name;
-        this.id = id;
-    }
+
 
     public String getName() {
         return name;
