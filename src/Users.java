@@ -19,9 +19,14 @@ public class Users {
 
 
 
-//Removed time parameter from constructor as we will set time using setter and addTime method.
-    public Users(String name, String lastName, int id) {
+    //Removed time parameter from constructor as we will set time using setter and addTime method.
+    public Users(String name, String lastName) {
 
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    public Users(String name, String lastName, int id) { // this new constructor will get called when users is called
         this.name = name;
         this.lastName = lastName;
         this.id = id;
@@ -34,7 +39,8 @@ public class Users {
     }
 
     public void setTime(String time) {
-        this.time = time;
+        try{this.time = time;}catch (Exception e) {System.out.println("error");}
+
     }
 
     public String getLastName() {
