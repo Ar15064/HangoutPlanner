@@ -41,28 +41,38 @@ public class View{
 
 //        return dataManager.getUser(name, lastName);
 
-        // type in name last name id and time
+    // type in name last name id and time
 
 
 //    }
 
+
     public static void main(String[] args) {
 
         //Hardcoded some values for us to test
-        Users user1 = new Users("Alek","Ramirez",1);
-        Users user2 = new Users("Zeshan","Merchant",2);
-        Users user3 = new Users("Jackson","Jonas",3);
-        Users user4 = new Users("Sub","Roza",4);
+        Users user1 = new Users("Alek","Ramirez");
+        Users user2 = new Users("Zeshan","Merchant");
+        Users user3 = new Users("Jackson","Jonas");
+        Users user4 = new Users("Sub","Roza");
         DataManager dataManager = new DataManager();
         Scanner in = new Scanner(System.in);
         int choice;
         int userID;
+        String choiceS;
 
         //adding user in arrayList using your method addUser
         dataManager.addUser(user1);
         dataManager.addUser(user2);
         dataManager.addUser(user3);
         dataManager.addUser(user4);
+
+//        dataManager.toStringList(); // all test code
+//
+//        System.out.println(" ");
+//
+//        dataManager.removeUser(3);
+//
+//        dataManager.toStringList();
 
 
 
@@ -78,39 +88,42 @@ public class View{
 
         System.out.println("WELCOME TO THE HANGOUT PLANNER");
 
-        while(true){
-            menu();
-            System.out.print("Enter your choice : ");
-            choice = in.nextInt();
+        while(true) {
+                menu();
+                System.out.print("Enter your choice : ");
+                choice = in.nextInt();
 
-            switch(choice){
-                case 1:
-                    //ADD TIME
+                switch (choice) {
+                    case 1:
+                        //ADD TIME
 //                    for(int i = 0; i<dataManager.usersList.size();i++){
 //                        DataManager.updateTime(dataManager.usersList.get(i));
 //                    }
-                    System.out.print("Enter the user ID to add time : ");
-                    userID = in.nextInt();
-                    DataManager.addTime(userID);
-                    break;
-                case 2:
-                    System.out.print("Enter the user ID to update time : ");
-                    userID = in.nextInt();
-                    DataManager.updateTime(userID);
-                    break;
-                case 3:
-                    System.out.println("Here is all user time");
-                    dataManager.viewTime();
-                    break;
-                case 4 :
-                    System.out.println("Here is the best time");
-                    break;
-                case 5:
-                    System.out.println("Exit");
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid Input");
-            }
+                            System.out.print("Enter the user ID to add time : ");
+                            userID = in.nextInt();
+                            DataManager.addTime(userID);
+                            break;
+
+                    case 2:
+                            System.out.print("Enter the user ID to update time : ");
+                            userID = in.nextInt();
+                            DataManager.updateTime(userID);
+                            break;
+
+                    case 3:
+                        System.out.println("Here is all user time");
+                        dataManager.viewTime();
+                        break;
+                    case 4:
+                        System.out.println("Here is the best time");
+                        break;
+                    case 5:
+                        System.out.println("Exit");
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid Input");
+                }
+
         }
     }
 }
