@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,14 +5,13 @@ public class DataManager {
 
     static Scanner in = new Scanner(System.in);
     static ArrayList<Users> usersList;
-    ArrayList<String> userTime;
     public Object userList;
 
-    static int count = 0;
+    static int count = -1;
 
     DataManager() {
         usersList = new ArrayList<>();
-        userTime = new ArrayList<>();
+
     }
 
 
@@ -21,11 +19,12 @@ public class DataManager {
 
 
     public void addUser(Users newUser) {
-        if(checkSize() == false) {count++;
-            this.usersList.add(newUser);}
+        if(checkSize() == false) {count++;  System.out.println(count);
+            this.usersList.add(new Users(newUser.getName(),newUser.getLastName(),count));}
+        // we are going to make a new user but using constructor that doenst have and id
+        // the id will be count. the count starts at -1 so when running it starts at 0
 
         else System.out.println("users are full");
-
 
     }
 
@@ -74,26 +73,29 @@ public class DataManager {
 
 
     public static void updateTime(int id) {
-        boolean userFound = false;
-        String newTime;
-        for(int i = 0; i < usersList.size(); i++) {
-            if(usersList.get(i).getId() == id && usersList.get(i).getTime() != null) {
-                String oldTime = usersList.get(i).getTime();
-                System.out.println("Enter the new time : ");
-                newTime = in.nextLine();
-                usersList.get(i).setTime(newTime);
-                System.out.println("Old time " + oldTime);
-                System.out.println("New time " + newTime);
-                userFound = true;
-                break;
+        try {
+            boolean userFound = false;
+            String newTime;
+            for (int i = 0; i < usersList.size(); i++) {
+                if (usersList.get(i).getId() == id && usersList.get(i).getTime() != null) {
+                    String oldTime = usersList.get(i).getTime();
+                    System.out.println("Enter the new time : ");
+                    newTime = in.nextLine();
+                    if(validTime(newTime) == true){
+                    usersList.get(i).setTime(newTime);
+                    System.out.println("Old time " + oldTime);
+                    System.out.println("New time " + newTime);
+                    userFound = true;
+                    break;} else break;
+                }
             }
-        }
 
-        if(userFound) {
-            System.out.println("Time has been updated");
-        } else {
-            System.out.println("User not found or no time added");
-        }
+            if (userFound) {
+                System.out.println("Time has been updated");
+            } else {
+                System.out.println("User not found or no time added");
+            }
+        } catch (Exception e) {System.out.println("error");}
     }
 
 
@@ -110,11 +112,13 @@ public class DataManager {
             if(usersList.get(i).getId()==id){
                 System.out.println("Enter the time to add : ");
                 time = in.nextLine();
+                if(validTime(time) == true){
                 usersList.get(i).setTime(time);
                 System.out.println(usersList.get(i).getTime());
-
                 userFound = true;
-                break;
+                break;}
+
+                else break;
             }
 
         }
@@ -123,6 +127,23 @@ public class DataManager {
         } else{
             System.out.println("User not found");
         }
+    }
+
+    public static boolean validTime(String time) { // checks if the time is valid
+        int count = 0;
+        try{
+        for (int i = 0; i < time.length(); i++) {
+            if(i == 2);
+            else {
+                if(Integer.parseInt(String.valueOf(time.charAt(0))) >= 0) count++;
+            }
+        }
+
+        if(count == 3 || count == 4) return true;
+
+        return false;}
+
+        catch (Exception e) {System.out.println("error"); return false;}
     }
 
 
@@ -134,6 +155,19 @@ public class DataManager {
                 System.out.println(usersList.get(i).getName() + "'s time is " + usersList.get(i).getTime());
             }
         }
+    }
+
+    public String bestTime(ArrayList<Users> usersList) {
+        int store = 0;
+        int store1 = 0;
+        for (int i = 0; i < usersList.size(); i++) {
+            for (int j = 1; j < usersList.size(); j++) {
+
+            }
+        }
+
+
+        return "Try again";
     }
 
     public void sortUsers() {
